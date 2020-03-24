@@ -96,7 +96,7 @@ BoomOutput.prototype.getDataAsDebugHTML = function(data: IBoomSeries[]): string 
     )} / Stat : ${d.pattern.valueName}">${d.display_value}</td>
             <td style="padding:4px;text-align:left;width:10%; title="Row name" >${d.row_name}</td>
             <td style="padding:4px;text-align:left;width:10%; title="Col name" >${d.col_name}</td>
-            <td style="padding:4px;text-align:left;width:10%; title="Thresholds" >${d.thresholds.join(',')}</td>
+            <td style="padding:4px;text-align:left;width:10%; title="Thresholds" >${d.thresholds.join(d.separator)}</td>
             <td style="padding:4px;text-align:left;width:10%; title="BG Color" >${d.color_bg}</td>
             <td style="padding:4px;text-align:left;width:10%; title="Text Color" >${d.color_text}</td>
         </tr>

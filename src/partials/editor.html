@@ -182,8 +182,21 @@
                             <input type="text" placeholder="Thresholds" class="gf-form-input width-18" ng-model="pattern.thresholds"
                                 bs-tooltip="'Comma separated thresholds'" ng-blur="ctrl.render()" data-ng-change="ctrl.render();">
                         </div>
-                    </div>
-
+                    </div>                
+                    <div class="gr-form-inline">
+                        <div class="gf-form">
+                            <label class="gf-form-label width-12">Dynamic Thresholds</label>
+                            <input type="text" placeholder="Dynamic Thresholds" class="gf-form-input width-18" ng-model="pattern.dynThresholds"
+                                bs-tooltip="'Colum names for dynamic thresholds separated by separator. Has priority over thresholds.'" ng-blur="ctrl.render()" data-ng-change="ctrl.render();">
+                        </div>
+                    </div>                
+                    <div class="gr-form-inline">
+                        <div class="gf-form">
+                            <label class="gf-form-label width-12">Separator</label>
+                            <input type="text" placeholder="Separator" class="gf-form-input width-18" ng-model="pattern.separator"
+                                    bs-tooltip="'Separator'" ng-blur="ctrl.render()" data-ng-change="ctrl.render();">
+                        </div>
+                    </div>                
                     <div class="gr-form-inline">
                         <div class="gf-form">
                             <label class="gf-form-label width-26">Change BG Color based on thresholds?</label>

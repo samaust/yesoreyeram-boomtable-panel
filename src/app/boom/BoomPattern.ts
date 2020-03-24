@@ -33,6 +33,8 @@ class BoomPattern implements IBoomPattern {
   public textColors: string;
   public textColors_overrides: string;
   public thresholds: string;
+  public dynThresholds: string;
+  public separator: string;
   public time_based_thresholds: IBoomTimeBasedThreshold[];
   public transform_values: string;
   public transform_values_overrides: string;
@@ -79,6 +81,8 @@ class BoomPattern implements IBoomPattern {
     this.pattern = options && options.pattern ? options.pattern : '^server.*cpu$';
     this.row_name = options && options.row_name ? options.row_name : this.row_col_wrapper + '0' + this.row_col_wrapper;
     this.thresholds = options && options.thresholds ? options.thresholds : '70,90';
+    this.dynThresholds = options && options.dynThresholds ? options.dynThresholds : 'a,b';
+    this.separator = options && options.separator ? options.separator : ',';
     this.time_based_thresholds = [];
     this.transform_values = options && options.transform_values ? options.transform_values : '_value_|_value_|_value_';
     this.transform_values_overrides = options && options.transform_values_overrides ? options.transform_values_overrides : '0->down|1->up';

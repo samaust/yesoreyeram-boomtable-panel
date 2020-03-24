@@ -14,6 +14,7 @@ interface IBoomPattern {
   enable_transform: Boolean;
   enable_transform_overrides: Boolean;
   displayTemplate: string;
+  dynThresholds: string;
   defaultBGColor: string;
   defaultTextColor: string;
   filter: {
@@ -30,6 +31,7 @@ interface IBoomPattern {
   textColors: string;
   textColors_overrides: string;
   thresholds: string;
+  separator: string;
   time_based_thresholds: IBoomTimeBasedThreshold[];
   transform_values: string;
   transform_values_overrides: string;

@@ -28,6 +28,10 @@ class BoomSeries implements IBoomSeries {
     public value_formatted = "-";
     public link = "-";
     public thresholds: Number[];
+    public dynThresholds: Number[];
+    public bgColors: string[];
+    public bgColors_overrides: string[];
+    public separator: string;
     public hidden: Boolean = false;
     public _metricname = "";
     public _tags: any[] = [];
@@ -60,7 +64,13 @@ class BoomSeries implements IBoomSeries {
         this.row_name_raw = getRowName(this.pattern.row_name, this.pattern.delimiter, this.row_col_wrapper, this.seriesName, this._metricname, this._tags);
         this.col_name = getColName(this.pattern.col_name, this.pattern.delimiter, this.row_col_wrapper, this.seriesName, this.row_name, this._metricname, this._tags);
 
-        this.thresholds = getThresholds(templateSrv.replace(this.pattern.thresholds, scopedVars).split(",").map(d => +d), this.pattern.enable_time_based_thresholds, this.pattern.time_based_thresholds, this.currentTimeStamp);
+        this.separator = this.pattern.separator || panelDefaultPattern.separator || ",";
+        this.thresholds = getThresholds(templateSrv.replace(this.pattern.thresholds, scopedVars).split(this.separator).map(d => +d), this.pattern.enable_time_based_thresholds, this.pattern.time_based_thresholds, this.currentTimeStamp);
+        this.dynThresholds = (this.pattern.dynThresholds || "a,b").split(this.separator);
+
+        this.bgColors = templateSrv.replace(this.pattern.bgColors, scopedVars).split("|");
+        this.bgColors_overrides = templateSrv.replace(this.pattern.bgColors_overrides, scopedVars).split("|");
+
         this.color_bg = getBGColor(this.value, this.pattern, this.thresholds, templateSrv.replace(this.pattern.bgColors, scopedVars).split("|"), templateSrv.replace(this.pattern.bgColors_overrides, scopedVars).split("|"));
         this.color_text = getTextColor(this.value, this.pattern, this.thresholds, templateSrv.replace(this.pattern.textColors, scopedVars).split("|"), templateSrv.replace(this.pattern.textColors_overrides, scopedVars).split("|"));
         this.template_value = getDisplayValueTemplate(this.value, this.pattern, this.seriesName, this.row_col_wrapper, this.thresholds);
@@ -89,7 +99,7 @@ class BoomSeries implements IBoomSeries {
 
         if (this.debug_mode !== true) {
             delete this.seriesName;
-            delete this.pattern;
+            // delete this.pattern; // data required by dynamic thresholds
             delete this.thresholds;
             delete this.decimals;
             delete this.template_value;

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { IBoomSeries, IBoomCellDetails, IBoomTable, IBoomTableTransformationOptions } from './boom/index';
 import { BoomPattern, replaceTokens } from './boom/index';
+import { getBGColor } from "./boom/BoomSeriesUtils";
 import { default_pattern_options } from './config';
 
 const defaultPattern = new BoomPattern(default_pattern_options);
@@ -29,6 +30,27 @@ const seriesToTable = function(inputdata: IBoomSeries[], options: IBoomTableTran
           value: NaN,
         });
       } else if (matched_items && matched_items.length === 1) {
+        // Change background color if pattern.enable_textColor is checked
+        if (matched_items[0].pattern.enable_bgColor) {
+          let dynThresholds_float: number[] = [];
+          _.each(matched_items[0].dynThresholds, dynThreshold_string => {
+            let matched_dynThresholds_items = _.filter(inputdata, o => {
+              return o.row_name === row_name && o.col_name === dynThreshold_string;
+            });
+            if (matched_dynThresholds_items && matched_dynThresholds_items.length === 1) {
+              dynThresholds_float.push(matched_dynThresholds_items[0].value);
+            }
+
+          });
+          if (dynThresholds_float.length > 0) {
+            matched_items[0].color_bg = getBGColor(
+              matched_items[0].value,
+              matched_items[0].pattern,
+              dynThresholds_float,
+              matched_items[0].bgColors,
+              matched_items[0].bgColors_overrides);
+          }
+        }
         cols.push(matched_items[0]);
       } else if (matched_items && matched_items.length > 1) {
         cols.push({
