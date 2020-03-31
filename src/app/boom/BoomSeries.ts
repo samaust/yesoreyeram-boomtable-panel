@@ -56,7 +56,7 @@ class BoomSeries implements IBoomSeries {
         this.value = getSeriesValue(series, this.pattern.valueName);
         this.value_formatted = get_formatted_value(this.value, this.decimals, this.pattern.format);
         this.display_value = ((_.isNaN(this.value) || this.value === null) ? this.pattern.null_value : String(this.value)).toString();
-        this.hidden = doesValueNeedsToHide(this.value, this.pattern.filter);
+        this.hidden = this.pattern.hidden === true ? true : doesValueNeedsToHide(this.value, this.pattern.filter);
         this._metricname = this.pattern.delimiter.toLowerCase() === "tag" ? getMetricNameFromTaggedAlias(seriesData.target) : "";
         this._tags = this.pattern.delimiter.toLowerCase() === "tag" ? getLablesFromTaggedAlias(seriesData.target, this._metricname) : [];
 

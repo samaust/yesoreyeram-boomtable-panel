@@ -13,7 +13,7 @@ module.exports = {
   ],
   "testRegex": "(\\.|/)(spec|jest)\\.(jsx?|tsx?)$",
   "roots": [
-    "tests",
+    "src/tests",
     "src"
   ],
   "moduleDirectories": [

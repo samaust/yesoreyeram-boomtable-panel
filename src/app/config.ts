@@ -4,8 +4,10 @@ const value_name_options = [
   { text: 'Max', value: 'max' },
   { text: 'Average', value: 'avg' },
   { text: 'Current', value: 'current' },
+  { text: 'Time of first non null data point', value: 'first_time_nonnull' },
   { text: 'Time of last data point', value: 'last_time' },
   { text: 'Time of last non null data point', value: 'last_time_nonnull' },
+  { text: 'Time of last non null data point minus time of first non null data point', value: 'last_time_nonnull_minus_first_time_nonnull' },
   { text: 'Total', value: 'total' },
 ];
 const textAlignmentOptions = ['left', 'right', 'center'];
@@ -46,6 +48,7 @@ const default_pattern_options: any = {
     value_below: '',
   },
   format: 'none',
+  hidden: false,
   name: 'Default Pattern',
   null_color: 'darkred',
   null_textcolor: 'white',

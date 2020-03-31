@@ -165,7 +165,7 @@ GrafanaBoomTableCtrl.prototype.render = function () {
     };
     let boom_output = new BoomOutput(renderingOptions);
     this.outdata = {
-      cols_found: boomtabledata.cols_found.map(col => {
+      cols_show: boomtabledata.cols_show.map(col => {
         return this.$sce.trustAsHtml(col);
       }),
     };

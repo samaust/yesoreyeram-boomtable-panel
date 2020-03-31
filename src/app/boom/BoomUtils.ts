@@ -180,10 +180,21 @@ export const getSeriesValue = function (series: any, statType: string): number {
       if (_.last(series.datapoints)) {
         value = _.last(series.datapoints)[1];
       }
+    } else if (statType === 'first_time_nonnull') {
+      let non_null_data = series.datapoints.filter(s => s[0]);
+      if (_.first(non_null_data) && _.first(non_null_data)[1]) {
+        value = _.first(non_null_data)[1];
+      }
     } else if (statType === 'last_time_nonnull') {
       let non_null_data = series.datapoints.filter(s => s[0]);
       if (_.last(non_null_data) && _.last(non_null_data)[1]) {
         value = _.last(non_null_data)[1];
+      }
+    } else if (statType === 'last_time_nonnull_minus_first_time_nonnull') {
+      let non_null_data = series.datapoints.filter(s => s[0]);
+      if (_.last(non_null_data) && _.last(non_null_data)[1] &&
+          _.first(non_null_data) && _.first(non_null_data)[1]) {
+        value = _.last(non_null_data)[1] - _.first(non_null_data)[1];
       }
     } else if (series.stats) {
       value = series.stats[statType] || null;

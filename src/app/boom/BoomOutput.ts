@@ -52,7 +52,8 @@ BoomOutput.prototype.getDataAsHTML = function(data: IBoomTable, sorting_props): 
       .sort((a, b) => sortFunction(a, b, sorting_props.direction));
   }
   _.each(data.output, o => {
-    if (o.map(item => item.hidden.toString()).indexOf('false') > -1) {
+    let not_hidden = o.map(item => item.hidden.toString()).indexOf('false') > -1;
+    if (not_hidden) {
       output.body += '<tr>';
       if (this.hide_first_column !== true) {
         let raw_rowName = _.first(o.map(item => item.row_name_raw));

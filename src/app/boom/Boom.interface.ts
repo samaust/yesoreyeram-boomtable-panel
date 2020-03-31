@@ -22,6 +22,7 @@ interface IBoomPattern {
     value_below: string;
   };
   format: string;
+  hidden: Boolean;
   name: string;
   null_color: string;
   null_value: string;
@@ -86,7 +87,7 @@ interface IBoomCellDetails {
 interface IBoomTable {
   rows_without_token: string[];
   rows_found: string[];
-  cols_found: string[];
+  cols_show: string[];
   output: IBoomCellDetails[][];
 }
 interface IBoomHTML {

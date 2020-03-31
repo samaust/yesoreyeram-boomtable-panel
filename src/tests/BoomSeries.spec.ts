@@ -80,7 +80,9 @@ describe("Boom Series", () => {
         expect(getSeriesValue(dummy_series_1, "last_time")).toBe(null);
         expect(getSeriesValue(dummy_series_1, "LAST_TIME")).toBe(null);
         expect(getSeriesValue(dummy_series_2, "total")).toBe(dummy_series_2.stats.total);
+        expect(getSeriesValue(dummy_series_2, "first_time_nonnull")).toBe(1575198840000);
         expect(getSeriesValue(dummy_series_2, "last_time_nonnull")).toBe(1575199020000);
+        expect(getSeriesValue(dummy_series_2, "last_time_nonnull_minus_first_time_nonnull")).toBe(180000);
         expect(getSeriesValue(dummy_series_2, "last_time")).toBe(1575199260000);
     });
     it("getCurrentTimeStamp", () => {

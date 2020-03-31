@@ -10,10 +10,30 @@ const seriesToTable = function(inputdata: IBoomSeries[], options: IBoomTableTran
   let rows_found = _.uniq(_.map(inputdata, d => d.row_name));
   let rows_without_token = _.uniq(_.map(inputdata, d => d.row_name_raw));
   let cols_found = _.uniq(_.map(inputdata, d => d.col_name));
+  // Add to cols_show if all rows of one column are hidden === false
+  let cols_show: string[] = [];
+
+  _.each(cols_found.sort(), col_name => {
+    let cell_hidden: Boolean[] = [];
+    _.each(rows_found.sort(), row_name => {
+      let matched_items = _.filter(inputdata, o => {
+        return o.row_name === row_name && o.col_name === col_name;
+      });
+      if (matched_items && matched_items.length === 1) {
+        cell_hidden.push(matched_items[0].hidden);
+      } else {
+        cell_hidden.push(false);
+      }
+    });
+    if (cell_hidden.map(item => item.toString()).indexOf('false') > -1) {
+      cols_show.push(col_name);
+    }
+  });
+
   let output: IBoomCellDetails[][] = [];
   _.each(rows_found.sort(), row_name => {
     let cols: IBoomCellDetails[] = [];
-    _.each(cols_found.sort(), col_name => {
+    _.each(cols_show.sort(), col_name => {
       let matched_items = _.filter(inputdata, o => {
         return o.row_name === row_name && o.col_name === col_name;
       });
@@ -69,7 +89,7 @@ const seriesToTable = function(inputdata: IBoomSeries[], options: IBoomTableTran
     output.push(cols);
   });
   return {
-    cols_found,
+    cols_show,
     output,
     rows_found,
     rows_without_token,

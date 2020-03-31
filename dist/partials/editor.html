@@ -398,6 +398,13 @@
                     </div>
                     <div class="gr-form-inline">
                         <div class="gf-form">
+                            <label class="gf-form-label width-26">Hide</label>
+                            <input type="checkbox" class="gf-form-input width-4" ng-model="pattern.hidden"
+                                ng-blur="ctrl.render()" ng-change="ctrl.render()">
+                        </div>
+                    </div>
+                    <div class="gr-form-inline">
+                        <div class="gf-form">
                             <label class="gf-form-label width-12">Hide if value is below</label>
                             <input type="text" placeholder="Number" class="gf-form-input width-18" ng-model="pattern.filter.value_below"
                                 bs-tooltip="'Hide values from display if below this value. Default is empty'" ng-blur="ctrl.render()">

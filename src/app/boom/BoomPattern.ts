@@ -24,6 +24,7 @@ class BoomPattern implements IBoomPattern {
     value_below: string;
   };
   public format: string;
+  public hidden: Boolean;
   public name: string;
   public null_color: string;
   public null_value: string;
@@ -74,6 +75,7 @@ class BoomPattern implements IBoomPattern {
       value_below: '',
     };
     this.format = options && options.format ? options.format : 'none';
+    this.hidden = false;
     this.name = options && options.name ? options.name : 'New Pattern';
     this.null_color = options && options.null_color ? options.null_color : 'darkred';
     this.null_textcolor = options && options.null_Textcolor ? options.null_Textcolor : 'black';

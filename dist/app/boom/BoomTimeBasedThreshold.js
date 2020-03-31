@@ -5,7 +5,7 @@ System.register([], function (exports_1, context_1) {
     return {
         setters: [],
         execute: function () {
-            BoomTimeBasedThreshold = (function () {
+            BoomTimeBasedThreshold = /** @class */ (function () {
                 function BoomTimeBasedThreshold() {
                     this.enabledDays = 'Sun,Mon,Tue,Wed,Thu,Fri,Sat';
                     this.from = '0000';
